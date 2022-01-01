@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:refold_pocket_roadmap/presentation/pages/home_page.dart';
 
+import 'common/app_themes.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,9 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Refold Pocket Roadmap',
-      home: HomePage(),
+      theme: ThemeData(appBarTheme: kAppBarTheme),
+      home: const HomePage(),
     );
   }
 }
