@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:refold_pocket_roadmap/common/app_colors.dart';
 import 'package:refold_pocket_roadmap/common/app_text_styles.dart';
+import 'package:refold_pocket_roadmap/presentation/widgets/stage_list_item.dart';
 
 class HomePage extends StatelessWidget {
   static String route = '/';
@@ -34,13 +35,26 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text("Detailed Roadmap", style: kTitle1),
                       ),
                       Row()
                     ],
                   ),
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(26.0),
+                  children: [
+                    StageListItem(
+                      marker: "Stage 0",
+                      title: "Refold Philosophy",
+                      subtitle:
+                          "Before you embark on your language learning journey, you need to prepare.",
+                    ),
+                  ],
                 ),
               ),
             ],
