@@ -35,8 +35,8 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text("Detailed Roadmap", style: kTitle1),
                       ),
                       Row()
@@ -46,13 +46,33 @@ class HomePage extends StatelessWidget {
               ),
               Expanded(
                 child: ListView(
-                  padding: const EdgeInsets.all(26.0),
                   children: [
                     StageListItem(
+                      color: kPrimaryColorLight,
                       marker: "Stage 0",
                       title: "Refold Philosophy",
                       subtitle:
-                          "Before you embark on your language learning journey, you need to prepare.",
+                          "Before you embark on your language learning journey, you need to prepare. This section gives you a tour of the method, mindset, and tools that you’ll be using throughout the journey.",
+                    ),
+                    StageListItem(
+                      marker: "Stage 1",
+                      title: "Lay The Foundation",
+                      subtitle:
+                          "Establish the skills, tools, and habits for immersion learning and jumpstart your comprehension by studying the basic grammar and vocabulary of your target language.",
+                    ),
+                    StageListItem(
+                      color: kPrimaryColorDark,
+                      marker: "Stage 2",
+                      title: "Build Comprehension",
+                      subtitle:
+                          "Learn directly from immersion until you fully understand.",
+                    ),
+                    StageListItem(
+                      color: kPrimaryColorDarkExtra,
+                      marker: "Stage 3",
+                      title: "Learn To Speak",
+                      subtitle:
+                          "Convert your acquired language into speaking ability.",
                     ),
                   ],
                 ),

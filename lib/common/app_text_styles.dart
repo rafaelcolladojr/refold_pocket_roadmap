@@ -38,5 +38,5 @@ const TextStyle kTitle4 = TextStyle(
 const TextStyle kParagraph = TextStyle(
   fontFamily: "Montserrat",
   color: kPrimaryColor,
-  fontSize: 12.0,
+  fontSize: 14.0,
 );
