@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Refold Pocket Roadmap',
       theme: ThemeData(appBarTheme: kAppBarTheme),
-      home: const HomePage(),
+      initialRoute: HomePage.route,
+      routes: {
+        HomePage.route: (_) => const HomePage(),
+      },
     );
   }
 }
