@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:refold_pocket_roadmap/core/error/exception.dart';
 import 'package:refold_pocket_roadmap/data/model/article_model.dart';
 import 'package:refold_pocket_roadmap/data/model/roadmap_model.dart';
 
@@ -29,6 +30,10 @@ class LocalRoadmapDatasourceImpl implements LocalRoadmapDatasource {
     // Use ID for article json file path
     String path = 'assets/json/$id.json';
     File file = File(path);
+
+    if (!await file.exists()) {
+      throw FileException();
+    }
 
     String articleJson = await file.readAsString();
     Article article = Article.fromJson(jsonDecode(articleJson));

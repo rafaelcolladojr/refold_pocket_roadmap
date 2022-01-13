@@ -1,0 +1,1 @@
+class FileException implements Exception {}

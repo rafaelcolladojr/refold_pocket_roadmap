@@ -4,15 +4,7 @@ abstract class Failure extends Equatable {
   const Failure();
 }
 
-class ServerFailure implements Failure {
-  @override
-  List<Object?> get props => [props];
-
-  @override
-  bool? get stringify => true;
-}
-
-class CacheFailure implements Failure {
+class FileFailure implements Failure {
   @override
   List<Object?> get props => [props];
 
