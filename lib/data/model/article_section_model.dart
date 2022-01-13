@@ -1,27 +1,27 @@
+import 'package:refold_pocket_roadmap/domain/entity/article_section_entity.dart';
+
 import 'article_model.dart';
 
-class ArticleSection {
-  ArticleSection({
-    required this.id,
-    required this.title,
-    required this.articles,
-  });
+class ArticleSectionModel extends ArticleSection {
+  ArticleSectionModel({
+    required String id,
+    required String title,
+    required List<ArticleModel> articles,
+  }) : super(id: id, title: title, articles: articles);
 
-  String id;
-  String title;
-  List<Article> articles;
-
-  factory ArticleSection.fromJson(Map<String, dynamic> json) => ArticleSection(
+  factory ArticleSectionModel.fromJson(Map<String, dynamic> json) =>
+      ArticleSectionModel(
         id: json["id"],
         title: json["title"],
-        articles: List<Article>.from(
-            json["articles"].map((x) => Article.fromJson(x))),
+        articles: List<ArticleModel>.from(
+            json["articles"].map((x) => ArticleModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
+        "articles": List<ArticleModel>.from(
+            articles.map((x) => (x as ArticleModel).toJson())),
       };
 
   @override

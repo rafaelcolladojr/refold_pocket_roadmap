@@ -3,6 +3,7 @@ import 'package:refold_pocket_roadmap/data/datasource/local_roadmap_datasource.d
 import 'package:refold_pocket_roadmap/data/model/roadmap_model.dart';
 import 'package:refold_pocket_roadmap/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:refold_pocket_roadmap/domain/entity/roadmap_entity.dart';
 import 'package:refold_pocket_roadmap/domain/repository/roadmap_repository.dart';
 
 class RoadmapRepositoryImpl implements RoadmapRepository {

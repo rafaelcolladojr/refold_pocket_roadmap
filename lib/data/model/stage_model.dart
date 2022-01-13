@@ -1,26 +1,29 @@
+import 'package:refold_pocket_roadmap/data/model/article_details_model.dart';
+import 'package:refold_pocket_roadmap/domain/entity/stage_details_entity.dart';
+import 'package:refold_pocket_roadmap/domain/entity/stage_entity.dart';
+
 import 'stage_details_model.dart';
 
-class Stage {
-  Stage({
-    required this.id,
-    required this.subtitle,
-    required this.headline,
-    required this.intro,
-    required this.details,
-  });
+class StageModel extends Stage {
+  StageModel({
+    required String id,
+    required String subtitle,
+    required String headline,
+    required String intro,
+    required StageDetailsModel details,
+  }) : super(
+            id: id,
+            subtitle: subtitle,
+            headline: headline,
+            intro: intro,
+            details: details);
 
-  String id;
-  String subtitle;
-  String headline;
-  String intro;
-  StageDetails details;
-
-  factory Stage.fromJson(Map<String, dynamic> json) => Stage(
+  factory StageModel.fromJson(Map<String, dynamic> json) => StageModel(
         id: json["id"],
         subtitle: json["subtitle"],
         headline: json["headline"],
         intro: json["intro"],
-        details: StageDetails.fromJson(json["details"]),
+        details: StageDetailsModel.fromJson(json["details"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,7 +31,7 @@ class Stage {
         "subtitle": subtitle,
         "headline": headline,
         "intro": intro,
-        "details": details.toJson(),
+        "details": (details as StageDetailsModel).toJson(),
       };
 
   @override

@@ -1,13 +1,12 @@
-class ArticleDetails {
-  ArticleDetails({
-    required this.title,
-    required this.body,
-  });
+import 'package:refold_pocket_roadmap/domain/entity/article_details_entity.dart';
 
-  String title;
-  String body; // Body of the article in HTML format
+class ArticleDetailsModel extends ArticleDetails {
+  ArticleDetailsModel({
+    required String title,
+    required String body,
+  }) : super(title: title, body: body);
 
-  factory ArticleDetails.empty() => ArticleDetails(
+  factory ArticleDetailsModel.empty() => ArticleDetailsModel(
         title: '',
         body: '',
       );

@@ -1,41 +1,42 @@
 import 'dart:convert';
 
+import 'package:refold_pocket_roadmap/domain/entity/roadmap_entity.dart';
+
 import 'article_model.dart';
 import 'article_section_model.dart';
 import 'stage_model.dart';
 
-String roadmapToJson(Roadmap data) => json.encode(data.toJson());
+String roadmapToJson(RoadmapModel data) => json.encode(data.toJson());
 
-class Roadmap {
-  Roadmap({
-    required this.type,
-    required this.lang,
-    required this.stages,
-  });
+class RoadmapModel extends Roadmap {
+  RoadmapModel({
+    required String type,
+    required String lang,
+    required List<StageModel> stages,
+  }) : super(type: type, lang: lang, stages: stages);
 
-  String type;
-  String lang;
-  List<Stage> stages;
-
-  factory Roadmap.fromJson(Map<String, dynamic> json) => Roadmap(
+  factory RoadmapModel.fromJson(Map<String, dynamic> json) => RoadmapModel(
         type: json["type"],
         lang: json["lang"],
-        stages: List<Stage>.from(json["stages"].map((x) => Stage.fromJson(x))),
+        stages: List<StageModel>.from(
+            json["stages"].map((x) => StageModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
         "lang": lang,
-        "stages": List<dynamic>.from(stages.map((x) => x.toJson())),
+        "stages":
+            List<dynamic>.from(stages.map((x) => (x as StageModel).toJson())),
       };
 
-  List<Article> getAllArticles() {
-    List<Article> articles = List.empty(growable: true);
-    for (Stage stage in stages) {
-      Article overview = stage.details.overview;
+  List<ArticleModel> getAllArticles() {
+    List<ArticleModel> articles = List.empty(growable: true);
+    for (StageModel stage in (stages as List<StageModel>)) {
+      ArticleModel overview = (stage.details.overview as ArticleModel);
       articles.add(overview);
-      for (ArticleSection section in stage.details.articleSections) {
-        articles.addAll(section.articles);
+      for (ArticleSectionModel section
+          in (stage.details.articleSections as List<ArticleSectionModel>)) {
+        articles.addAll(section.articles as List<ArticleModel>);
       }
     }
     return articles;

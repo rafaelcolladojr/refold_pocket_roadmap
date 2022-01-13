@@ -1,21 +1,19 @@
-class Article {
-  Article({
-    required this.id,
-    required this.title,
-    required this.body,
-  });
+import 'package:refold_pocket_roadmap/domain/entity/article_entity.dart';
 
-  String id;
-  String title;
-  String body;
+class ArticleModel extends Article {
+  ArticleModel({
+    required String id,
+    required String title,
+    required String body,
+  }) : super(id: id, title: title, body: body);
 
-  factory Article.fromJson(Map<String, dynamic> json) => Article(
+  factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
         id: json["id"],
         title: json["title"],
         body: json["body"],
       );
 
-  factory Article.empty() => Article(id: '', title: '', body: '');
+  factory ArticleModel.empty() => ArticleModel(id: '', title: '', body: '');
 
   Map<String, dynamic> toJson() => {
         "id": id,
