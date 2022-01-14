@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:refold_pocket_roadmap/presentation/pages/home_page.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/home_page.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/roadmap_page.dart';
 
-import 'common/app_themes.dart';
+import 'core/util/app_themes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomePage.route,
       routes: {
         HomePage.route: (_) => const HomePage(),
+        RoadmapPage.route: (_) => const RoadmapPage(),
       },
     );
   }
