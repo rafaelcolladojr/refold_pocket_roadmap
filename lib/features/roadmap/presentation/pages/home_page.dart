@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:refold_pocket_roadmap/config/config.dart';
 import 'package:refold_pocket_roadmap/core/util/app_colors.dart';
 import 'package:refold_pocket_roadmap/core/util/app_text_styles.dart';
-import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/stage_list_item.dart';
+import 'package:refold_pocket_roadmap/core/util/roadmap_language.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/roadmap_page.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/roadmap_list_item.dart';
 
 class HomePage extends StatelessWidget {
   static String route = '/';
@@ -11,73 +14,108 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     MediaQueryData deviceInfo = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(
-          leading: IconButton(
-              color: kPrimaryColor,
-              onPressed: () {},
-              icon: const Icon(Icons.search, color: kPrimaryColor, size: 30.0)),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.menu, color: kPrimaryColor, size: 30.0)),
-          ]),
       body: SafeArea(
-        child: Container(
-          color: kBackgroundColorDark,
-          child: Column(
-            children: [
-              Material(
-                color: Colors.white,
-                elevation: 4.0,
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  height: deviceInfo.size.height * 0.10,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("Detailed Roadmap", style: kTitle1),
+        child: DefaultTabController(
+          length: kAvailableRoadmaps.length,
+          child: Container(
+            color: kPrimaryColorDark.withAlpha(70),
+            child: Column(
+              children: [
+                Material(
+                  color: Colors.white,
+                  elevation: 4.0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        opacity: 0.2,
+                        image: AssetImage('assets/images/logo-primary.png'),
+                        alignment: Alignment.topLeft,
+                        fit: BoxFit.cover,
                       ),
-                      Row()
+                    ),
+                    padding: const EdgeInsets.all(8.0),
+                    height: deviceInfo.size.height * 0.25,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.menu,
+                                  color: kPrimaryColorDark,
+                                  size: 30.0,
+                                )),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text("Pocket Roadmaps",
+                              style: kTitle1.withColor(kPrimaryColorDark)),
+                        ),
+                        TabBar(
+                          isScrollable: true,
+                          indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: kPrimaryColorDark,
+                          ),
+                          unselectedLabelColor: kPrimaryColorDark,
+                          tabs: kAvailableRoadmaps.keys
+                              .map((lang) => Tab(text: lang.toLargeString()))
+                              .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      ListView(
+                        children: [
+                          RoadmapListItem(
+                            title: "Detailed Roadmap",
+                            onTap: () {
+                              Navigator.pushNamed(context, RoadmapPage.route);
+                            },
+                          ),
+                          const RoadmapListItem(
+                            title: "Simplified Roadmap",
+                          ),
+                        ],
+                      ),
+                      ListView(
+                        children: const [
+                          RoadmapListItem(
+                            title: "Quickstart Guide",
+                            backgroundImage:
+                                AssetImage('assets/images/flag-es.png'),
+                          ),
+                          RoadmapListItem(
+                            title: "Simplified Roadmap",
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: Text(
+                          'Coming Soon',
+                          style: kTitle2.withColor(kPrimaryColorDarkExtra),
+                        ),
+                      ),
+                      Center(
+                        child: Text(
+                          'Coming Soon',
+                          style: kTitle2.withColor(kPrimaryColorDarkExtra),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    StageListItem(
-                      color: kPrimaryColorLight,
-                      marker: "Stage 0",
-                      title: "Refold Philosophy",
-                      subtitle:
-                          "Before you embark on your language learning journey, you need to prepare. This section gives you a tour of the method, mindset, and tools that you’ll be using throughout the journey.",
-                    ),
-                    StageListItem(
-                      marker: "Stage 1",
-                      title: "Lay The Foundation",
-                      subtitle:
-                          "Establish the skills, tools, and habits for immersion learning and jumpstart your comprehension by studying the basic grammar and vocabulary of your target language.",
-                    ),
-                    StageListItem(
-                      color: kPrimaryColorDark,
-                      marker: "Stage 2",
-                      title: "Build Comprehension",
-                      subtitle:
-                          "Learn directly from immersion until you fully understand.",
-                    ),
-                    StageListItem(
-                      color: kPrimaryColorDarkExtra,
-                      marker: "Stage 3",
-                      title: "Learn To Speak",
-                      subtitle:
-                          "Convert your acquired language into speaking ability.",
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
