@@ -6,30 +6,36 @@ class RoadmapListItem extends StatelessWidget {
   const RoadmapListItem({
     Key? key,
     required this.title,
+    this.enabled = true,
     this.backgroundImage,
     this.onTap,
   }) : super(key: key);
 
   final String title;
+  final bool enabled;
   final ImageProvider? backgroundImage;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: enabled ? onTap : () {},
       child: Padding(
         padding: const EdgeInsets.only(top: 26.0, left: 26, right: 26),
-        child: Material(
-          borderRadius: BorderRadius.circular(30.0),
-          elevation: 8.0,
-          color: kBackgroundColor,
-          child: AspectRatio(
-            aspectRatio: 6 / 3,
-            child: ClipRRect(
+        child: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            enabled ? Colors.white : Colors.grey,
+            BlendMode.modulate,
+          ),
+          child: Material(
+            borderRadius: BorderRadius.circular(30.0),
+            elevation: 8.0,
+            color: kBackgroundColor,
+            child: AspectRatio(
+              aspectRatio: 6 / 3,
               child: Stack(
                 children: [
-                  PositionedDirectional(
+                  Positioned(
                     child: Padding(
                       padding: const EdgeInsets.all(30.0),
                       child: Center(
@@ -50,6 +56,8 @@ class RoadmapListItem extends StatelessWidget {
                       child: Image(
                         image: backgroundImage ??
                             const AssetImage('assets/images/logo-primary.png'),
+                        color: enabled ? Colors.white : Colors.grey.shade700,
+                        colorBlendMode: BlendMode.modulate,
                       ),
                     ),
                   ),

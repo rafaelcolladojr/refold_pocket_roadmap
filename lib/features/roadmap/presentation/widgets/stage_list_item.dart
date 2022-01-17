@@ -47,7 +47,7 @@ class StageListItem extends StatelessWidget {
                       subtitle,
                       style: kParagraph.withColor(kForegroundColor),
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 5,
+                      maxLines: 4,
                     ),
                   ),
                 ],

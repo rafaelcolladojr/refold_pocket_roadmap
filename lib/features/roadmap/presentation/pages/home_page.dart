@@ -84,6 +84,7 @@ class HomePage extends StatelessWidget {
                           ),
                           const RoadmapListItem(
                             title: "Simplified Roadmap",
+                            enabled: false,
                           ),
                         ],
                       ),
@@ -91,24 +92,28 @@ class HomePage extends StatelessWidget {
                         children: const [
                           RoadmapListItem(
                             title: "Quickstart Guide",
+                            enabled: false,
                             backgroundImage:
                                 AssetImage('assets/images/flag-es.png'),
                           ),
                           RoadmapListItem(
                             title: "Simplified Roadmap",
+                            enabled: false,
                           ),
                         ],
                       ),
                       Center(
                         child: Text(
                           'Coming Soon',
-                          style: kTitle2.withColor(kPrimaryColorDarkExtra),
+                          style: kTitle2
+                              .withColor(kPrimaryColorDarkExtra.withAlpha(100)),
                         ),
                       ),
                       Center(
                         child: Text(
                           'Coming Soon',
-                          style: kTitle2.withColor(kPrimaryColorDarkExtra),
+                          style: kTitle2
+                              .withColor(kPrimaryColorDarkExtra.withAlpha(100)),
                         ),
                       ),
                     ],
