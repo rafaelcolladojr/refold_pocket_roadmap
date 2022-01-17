@@ -56,8 +56,6 @@ class RoadmapListItem extends StatelessWidget {
                       child: Image(
                         image: backgroundImage ??
                             const AssetImage('assets/images/logo-primary.png'),
-                        color: enabled ? Colors.white : Colors.grey.shade700,
-                        colorBlendMode: BlendMode.modulate,
                       ),
                     ),
                   ),
