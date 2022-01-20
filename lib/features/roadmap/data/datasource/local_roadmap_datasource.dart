@@ -10,10 +10,18 @@ import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_ent
 abstract class LocalRoadmapDatasource {
   Future<Roadmap> getRoadmap(String id);
   Future<Article> getArticle(String id);
+
+  Future<List<Roadmap>> getRoadmapList();
 }
 
 class LocalRoadmapDatasourceImpl implements LocalRoadmapDatasource {
   LocalRoadmapDatasourceImpl();
+
+  @override
+  Future<List<Roadmap>> getRoadmapList() {
+    // TODO: implement getRoadmapList
+    throw UnimplementedError();
+  }
 
   @override
   Future<Roadmap> getRoadmap(String id) async {

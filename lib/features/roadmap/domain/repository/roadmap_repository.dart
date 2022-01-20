@@ -9,6 +9,8 @@ import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_ent
 abstract class RoadmapRepository {
   Future<Either<Failure, Roadmap>> getRoadmap(GetRoadmapParams params);
   Future<Either<Failure, Article>> getArticle(String id);
+
+  Future<Either<Failure, List<Roadmap>>> getRoadmapList();
 }
 
 class RoadmapRepositoryImpl implements RoadmapRepository {
@@ -16,6 +18,17 @@ class RoadmapRepositoryImpl implements RoadmapRepository {
     required this.localRoadmapDatasource,
   });
   final LocalRoadmapDatasource localRoadmapDatasource;
+
+  @override
+  Future<Either<Failure, List<Roadmap>>> getRoadmapList() async {
+    try {
+      List<Roadmap> roadmaps = await localRoadmapDatasource.getRoadmapList();
+      return Right(roadmaps);
+    } on FileException {
+      return Left(FileFailure());
+    }
+  }
+
   @override
   Future<Either<Failure, Roadmap>> getRoadmap(GetRoadmapParams params) async {
     // Currently only using prepackaged json files
