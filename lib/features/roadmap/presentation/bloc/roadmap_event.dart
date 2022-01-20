@@ -11,3 +11,5 @@ class GetArticleEvent extends RoadmapEvent {
 
   final String id;
 }
+
+class GetRoadmapListEvent extends RoadmapEvent {}
