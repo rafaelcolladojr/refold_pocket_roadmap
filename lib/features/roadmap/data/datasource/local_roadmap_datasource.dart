@@ -19,7 +19,7 @@ abstract class LocalRoadmapDatasource {
 }
 
 class LocalRoadmapDatasourceImpl implements LocalRoadmapDatasource {
-  LocalRoadmapDatasourceImpl();
+  LocalRoadmapDatasourceImpl(Object object);
 
   @override
   Map<RoadmapLanguage, List<RoadmapType>> getRoadmapMap() {
