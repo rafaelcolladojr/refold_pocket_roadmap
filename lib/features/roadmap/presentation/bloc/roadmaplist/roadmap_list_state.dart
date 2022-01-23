@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:refold_pocket_roadmap/core/util/roadmap_language.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_thumbnail_entity.dart';
 
 enum RoadmapListStatus { initial, loading, success, failure }
@@ -6,15 +7,15 @@ enum RoadmapListStatus { initial, loading, success, failure }
 class RoadmapListState extends Equatable {
   const RoadmapListState({
     this.status = RoadmapListStatus.initial,
-    this.thumbnails = const [],
+    this.thumbnails = const {},
   });
 
   final RoadmapListStatus status;
-  final List<RoadmapThumbnail> thumbnails;
+  final Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails;
 
   RoadmapListState copyWith({
     RoadmapListStatus? status,
-    List<RoadmapThumbnail>? thumbnails,
+    Map<RoadmapLanguage, List<RoadmapThumbnail>>? thumbnails,
   }) {
     return RoadmapListState(
       status: status ?? this.status,

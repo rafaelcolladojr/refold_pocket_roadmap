@@ -13,7 +13,8 @@ abstract class RoadmapRepository {
   Future<Either<Failure, Roadmap>> getRoadmap(GetRoadmapParams params);
   Future<Either<Failure, Article>> getArticle(String id);
 
-  Future<Either<Failure, List<RoadmapThumbnail>>> getRoadmapThumbnails();
+  Future<Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>>>
+      getRoadmapThumbnails();
 }
 
 class RoadmapRepositoryImpl implements RoadmapRepository {
@@ -23,17 +24,22 @@ class RoadmapRepositoryImpl implements RoadmapRepository {
   final LocalRoadmapDatasource localRoadmapDatasource;
 
   @override
-  Future<Either<Failure, List<RoadmapThumbnail>>> getRoadmapThumbnails() async {
+  Future<Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>>>
+      getRoadmapThumbnails() async {
     Map<RoadmapLanguage, List<RoadmapType>> roadmaps =
         localRoadmapDatasource.getRoadmapMap();
 
-    List<RoadmapThumbnail> thumbnails = List.empty(growable: true);
+    Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails = {};
+    for (RoadmapLanguage lang in thumbnails.keys) {
+      thumbnails[lang] = [];
+    }
+
     try {
       roadmaps.forEach((lang, types) async {
         for (var type in types) {
           String id = '${lang != RoadmapLanguage.en ? "{$lang}_" : ""}$type';
           bool exists = await localRoadmapDatasource.getRoadmapExists(id);
-          thumbnails
+          thumbnails[lang]!
               .add(RoadmapThumbnail(lang: lang, type: type, enabled: exists));
         }
       });
