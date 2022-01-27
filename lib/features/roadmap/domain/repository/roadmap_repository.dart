@@ -1,4 +1,5 @@
 import 'package:refold_pocket_roadmap/core/error/exception.dart';
+import 'package:refold_pocket_roadmap/core/params/get_article_params.dart';
 import 'package:refold_pocket_roadmap/core/params/get_roadmap_params.dart';
 import 'package:refold_pocket_roadmap/core/util/roadmap_language.dart';
 import 'package:refold_pocket_roadmap/core/util/roadmap_type.dart';
@@ -11,10 +12,9 @@ import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_thu
 
 abstract class RoadmapRepository {
   Future<Either<Failure, Roadmap>> getRoadmap(GetRoadmapParams params);
-  Future<Either<Failure, Article>> getArticle(String id);
+  Future<Either<Failure, Article>> getArticle(GetArticleParams params);
 
-  Future<Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>>>
-      getRoadmapThumbnails();
+  Future<Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>>> getRoadmapThumbnails();
 }
 
 class RoadmapRepositoryImpl implements RoadmapRepository {
@@ -24,25 +24,10 @@ class RoadmapRepositoryImpl implements RoadmapRepository {
   final LocalRoadmapDatasource localRoadmapDatasource;
 
   @override
-  Future<Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>>>
-      getRoadmapThumbnails() async {
-    Map<RoadmapLanguage, List<RoadmapType>> roadmaps =
-        localRoadmapDatasource.getRoadmapMap();
-
-    Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails = {};
-    for (RoadmapLanguage lang in thumbnails.keys) {
-      thumbnails[lang] = [];
-    }
-
+  Future<Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>>> getRoadmapThumbnails() async {
     try {
-      roadmaps.forEach((lang, types) async {
-        for (var type in types) {
-          String id = '${lang != RoadmapLanguage.en ? "{$lang}_" : ""}$type';
-          bool exists = await localRoadmapDatasource.getRoadmapExists(id);
-          thumbnails[lang]!
-              .add(RoadmapThumbnail(lang: lang, type: type, enabled: exists));
-        }
-      });
+      Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails = await localRoadmapDatasource.getRoadmapThumbnails();
+
       return Right(thumbnails);
     } on FileException {
       return Left(FileFailure());
@@ -63,9 +48,9 @@ class RoadmapRepositoryImpl implements RoadmapRepository {
   }
 
   @override
-  Future<Either<Failure, Article>> getArticle(String id) async {
+  Future<Either<Failure, Article>> getArticle(GetArticleParams params) async {
     try {
-      Article article = await localRoadmapDatasource.getArticle(id);
+      Article article = await localRoadmapDatasource.getArticle(params.id);
       return Right(article);
     } on FileException {
       return Left(FileFailure());

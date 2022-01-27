@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:refold_pocket_roadmap/config/config.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:refold_pocket_roadmap/core/error/exception.dart';
 import 'package:refold_pocket_roadmap/core/util/roadmap_language.dart';
 import 'package:refold_pocket_roadmap/core/util/roadmap_type.dart';
@@ -9,39 +9,52 @@ import 'package:refold_pocket_roadmap/features/roadmap/data/model/article_model.
 import 'package:refold_pocket_roadmap/features/roadmap/data/model/roadmap_model.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/article_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_entity.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_thumbnail_entity.dart';
 
 abstract class LocalRoadmapDatasource {
   Future<Roadmap> getRoadmap(String id);
   Future<Article> getArticle(String id);
 
-  Map<RoadmapLanguage, List<RoadmapType>> getRoadmapMap();
-  Future<bool> getRoadmapExists(String id);
+  Future<Map<RoadmapLanguage, List<RoadmapThumbnail>>> getRoadmapThumbnails();
 }
 
 class LocalRoadmapDatasourceImpl implements LocalRoadmapDatasource {
-  LocalRoadmapDatasourceImpl(Object object);
+  LocalRoadmapDatasourceImpl();
 
   @override
-  Map<RoadmapLanguage, List<RoadmapType>> getRoadmapMap() {
-    //TODO: Implement using json parsing
-    return kAvailableRoadmaps;
-  }
+  Future<Map<RoadmapLanguage, List<RoadmapThumbnail>>> getRoadmapThumbnails() async {
+    String path = 'assets/json/available_roadmaps.json';
+    Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails = {};
+    try {
+      String contents = await rootBundle.loadString(path);
+      Map<String, dynamic> json = jsonDecode(contents);
+      List<dynamic> languages = json['languages'] ?? [];
 
-  @override
-  Future<bool> getRoadmapExists(String id) async {
-    String path = 'assest/json/$id.json';
-    File file = File(path);
+      for (dynamic lang in languages) {
+        RoadmapLanguage roadmapLang = RoadmapLanguage.en.fromString(lang['lang']);
+        thumbnails[roadmapLang] = [];
+        List<dynamic> roadmaps = lang['roadmaps'];
 
-    return await file.exists();
+        for (dynamic roadmap in roadmaps) {
+          RoadmapType roadmapType = RoadmapType.detailed.fromString(roadmap['type']);
+          bool enabled = roadmap['enabled'];
+          RoadmapThumbnail entry = RoadmapThumbnail(lang: roadmapLang, type: roadmapType, enabled: enabled);
+          thumbnails[roadmapLang]!.add(entry);
+        }
+      }
+    } on Error {
+      throw FileException();
+    }
+
+    return thumbnails;
   }
 
   @override
   Future<Roadmap> getRoadmap(String id) async {
     // Use ID for roadmap json file path
     String path = 'assets/json/$id.json';
-    File file = File(path);
 
-    String roadmapJson = await file.readAsString();
+    String roadmapJson = await rootBundle.loadString(path);
     RoadmapModel roadmap = RoadmapModel.fromJson(jsonDecode(roadmapJson));
 
     return roadmap;
@@ -51,13 +64,14 @@ class LocalRoadmapDatasourceImpl implements LocalRoadmapDatasource {
   Future<Article> getArticle(String id) async {
     // Use ID for article json file path
     String path = 'assets/json/$id.json';
-    File file = File(path);
 
-    if (!await file.exists()) {
+    String articleJson = '';
+    try {
+      await rootBundle.loadString(path);
+    } on FlutterError {
       throw FileException();
     }
 
-    String articleJson = await file.readAsString();
     ArticleModel article = ArticleModel.fromJson(jsonDecode(articleJson));
 
     return article;

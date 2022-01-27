@@ -14,4 +14,9 @@ class RoadmapThumbnail extends Equatable {
 
   @override
   List<Object?> get props => [lang, type, enabled];
+
+  String toRoadmapId() {
+    // ex. es_quickstart
+    return '${lang == RoadmapLanguage.en ? "" : lang.toShortString() + "_"}$type';
+  }
 }

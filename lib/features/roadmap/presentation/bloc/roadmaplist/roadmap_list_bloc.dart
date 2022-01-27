@@ -16,16 +16,13 @@ class RoadmapListBloc extends Bloc<RoadmapListEvent, RoadmapListState> {
 
   final RoadmapRepository _roadmapRepository;
 
-  Future<void> _onGetRoadmapList(
-      GetRoadmapListEvent event, Emitter<RoadmapListState> emitter) async {
+  Future<void> _onGetRoadmapList(GetRoadmapListEvent event, Emitter<RoadmapListState> emitter) async {
     emitter(const RoadmapListState(status: RoadmapListStatus.loading));
 
-    Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>> result =
-        await _roadmapRepository.getRoadmapThumbnails();
+    Either<Failure, Map<RoadmapLanguage, List<RoadmapThumbnail>>> result = await _roadmapRepository.getRoadmapThumbnails();
 
     result.fold(
-      (left) =>
-          emitter(const RoadmapListState(status: RoadmapListStatus.failure)),
+      (left) => emitter(const RoadmapListState(status: RoadmapListStatus.failure)),
       (right) => emitter(RoadmapListState(
         status: RoadmapListStatus.success,
         thumbnails: right,
