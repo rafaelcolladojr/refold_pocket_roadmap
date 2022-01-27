@@ -4,22 +4,19 @@ import 'article_model.dart';
 import 'article_section_model.dart';
 
 class StageDetailsModel extends StageDetails {
-  StageDetailsModel({
+  const StageDetailsModel({
     required ArticleModel overview,
     required List<ArticleSectionModel> articleSections,
   }) : super(overview: overview, articleSections: articleSections);
 
-  factory StageDetailsModel.fromJson(Map<String, dynamic> json) =>
-      StageDetailsModel(
+  factory StageDetailsModel.fromJson(Map<String, dynamic> json) => StageDetailsModel(
         overview: ArticleModel.fromJson(json["overview"]),
-        articleSections: List<ArticleSectionModel>.from(json["article-sections"]
-            .map((x) => ArticleSectionModel.fromJson(x))),
+        articleSections: List<ArticleSectionModel>.from(json["article-sections"].map((x) => ArticleSectionModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "overview": (overview as ArticleModel).toJson(),
-        "article-sections": List<dynamic>.from(
-            articleSections.map((x) => (x as ArticleSectionModel).toJson())),
+        "article-sections": List<dynamic>.from(articleSections.map((x) => (x as ArticleSectionModel).toJson())),
       };
 
   @override

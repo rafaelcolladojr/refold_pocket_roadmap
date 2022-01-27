@@ -7,3 +7,4 @@ const Color kPrimaryColor = Color(0xff6544e9);
 const Color kPrimaryColorLight = Color(0xff8261ff);
 const Color kPrimaryColorDark = Color(0xff4a32ad);
 const Color kPrimaryColorDarkExtra = Color(0xff322173);
+const Color kPrimaryColorDisabled = Color(0xff5f5979);

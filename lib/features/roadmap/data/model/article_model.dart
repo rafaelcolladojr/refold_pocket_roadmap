@@ -1,7 +1,7 @@
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/article_entity.dart';
 
 class ArticleModel extends Article {
-  ArticleModel({
+  const ArticleModel({
     required String id,
     required String title,
     required String body,
@@ -13,7 +13,7 @@ class ArticleModel extends Article {
         body: json["body"],
       );
 
-  factory ArticleModel.empty() => ArticleModel(id: '', title: '', body: '');
+  factory ArticleModel.empty() => const ArticleModel(id: '', title: '', body: '');
 
   Map<String, dynamic> toJson() => {
         "id": id,

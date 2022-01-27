@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:refold_pocket_roadmap/core/util/app_colors.dart';
-import 'package:refold_pocket_roadmap/core/util/app_text_styles.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
 
 class RoadmapListItem extends StatelessWidget {
   const RoadmapListItem({
@@ -54,8 +54,7 @@ class RoadmapListItem extends StatelessWidget {
                     child: Opacity(
                       opacity: 0.7,
                       child: Image(
-                        image: backgroundImage ??
-                            const AssetImage('assets/images/logo-primary.png'),
+                        image: backgroundImage ?? const AssetImage('assets/images/logo-primary.png'),
                       ),
                     ),
                   ),

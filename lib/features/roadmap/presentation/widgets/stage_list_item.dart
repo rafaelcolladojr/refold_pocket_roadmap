@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:refold_pocket_roadmap/core/util/app_colors.dart';
-import 'package:refold_pocket_roadmap/core/util/app_text_styles.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
 
 class StageListItem extends StatelessWidget {
-  StageListItem({
+  const StageListItem({
     Key? key,
     required this.marker,
     required this.title,
-    String? subtitle,
-    Color? color,
-  }) : super(key: key) {
-    this.subtitle = subtitle ?? '';
-    this.color = color ?? kPrimaryColor;
-  }
+    this.subtitle = '',
+    this.color = kPrimaryColor,
+  }) : super(key: key);
 
   final String marker;
   final String title;
-  late String subtitle;
-  late Color color;
+  final String subtitle;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +36,7 @@ class StageListItem extends StatelessWidget {
                   Text(marker, style: kTitle4.withColor(kForegroundColor)),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child:
-                        Text(title, style: kTitle2.withColor(kBackgroundColor)),
+                    child: Text(title, style: kTitle2.withColor(kBackgroundColor)),
                   ),
                   Expanded(
                     child: Text(

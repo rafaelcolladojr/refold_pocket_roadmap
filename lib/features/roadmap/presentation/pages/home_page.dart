@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:refold_pocket_roadmap/core/util/app_colors.dart';
-import 'package:refold_pocket_roadmap/core/util/app_text_styles.dart';
-import 'package:refold_pocket_roadmap/core/util/roadmap_language.dart';
-import 'package:refold_pocket_roadmap/core/util/roadmap_type.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
+import 'package:refold_pocket_roadmap/core/util/enums/roadmap_language.dart';
+import 'package:refold_pocket_roadmap/core/util/enums/roadmap_type.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_thumbnail_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/bloc/roadmaplist/bloc.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/roadmap_page_args.dart';
@@ -91,6 +91,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  // Convert thumbnails keys (RoadmapLanguage) to language tab labels
   List<String> _mapToLanguages(Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails) {
     List<String> languages = List.empty(growable: true);
     for (RoadmapLanguage lang in thumbnails.keys) {
@@ -101,6 +102,7 @@ class HomePage extends StatelessWidget {
     return languages;
   }
 
+  // Convert RoadmapThumbnail list to widgets or "coming soon" if empty
   List<Widget> _mapToWidgets(BuildContext context, Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails) {
     List<Widget> widgets = [];
     for (RoadmapLanguage lang in thumbnails.keys) {
@@ -122,6 +124,7 @@ class HomePage extends StatelessWidget {
     return widgets;
   }
 
+  // Convert RoadmapThumbnails to RoadmapListItems
   List<RoadmapListItem> _thumbnailsToWidgets(BuildContext context, List<RoadmapThumbnail> thumbnails) {
     List<RoadmapListItem> widgets = [];
 
@@ -133,13 +136,14 @@ class HomePage extends StatelessWidget {
         onTap: () => Navigator.pushNamed(
           context,
           RoadmapPage.route,
-          arguments: RoadmapPageArgs(thumbnail.toRoadmapId()),
+          arguments: RoadmapPageArgs(type: thumbnail.type, lang: thumbnail.lang),
         ),
       ));
     }
     return widgets;
   }
 
+  // Whether to display spinner on initial state or list contents (if any)
   List<Widget> _stateToTabBarViewChildren(BuildContext context, RoadmapListState state) {
     if (state.status == RoadmapListStatus.initial) {
       return _mapToSpinners(state.thumbnails);
@@ -148,6 +152,7 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  // Generate (# of languages) spinners
   List<Widget> _mapToSpinners(Map<RoadmapLanguage, List<RoadmapThumbnail>> thumbnails) {
     List<Widget> widgets = [];
     thumbnails.forEach((key, value) {

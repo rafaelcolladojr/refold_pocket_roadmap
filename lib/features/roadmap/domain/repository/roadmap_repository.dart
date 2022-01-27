@@ -1,8 +1,7 @@
 import 'package:refold_pocket_roadmap/core/error/exception.dart';
 import 'package:refold_pocket_roadmap/core/params/get_article_params.dart';
 import 'package:refold_pocket_roadmap/core/params/get_roadmap_params.dart';
-import 'package:refold_pocket_roadmap/core/util/roadmap_language.dart';
-import 'package:refold_pocket_roadmap/core/util/roadmap_type.dart';
+import 'package:refold_pocket_roadmap/core/util/enums/roadmap_language.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/data/datasource/local_roadmap_datasource.dart';
 import 'package:refold_pocket_roadmap/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -38,7 +37,7 @@ class RoadmapRepositoryImpl implements RoadmapRepository {
   Future<Either<Failure, Roadmap>> getRoadmap(GetRoadmapParams params) async {
     // Currently only using prepackaged json files
 
-    String id = params.type + '_' + params.lang;
+    String id = '${params.lang == RoadmapLanguage.en.toShortString() ? "" : "${params.lang}_"}${params.type}';
     try {
       Roadmap roadmap = await localRoadmapDatasource.getRoadmap(id);
       return Right(roadmap);

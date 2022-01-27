@@ -4,13 +4,10 @@ import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_ent
 enum RoadmapStatus { initial, loading, success, failure }
 
 class RoadmapState extends Equatable {
-  RoadmapState({
-    this.status = RoadmapStatus.initial,
-    Roadmap? roadmap,
-  }) : roadmap = roadmap ?? Roadmap(lang: '', type: '', stages: []);
+  const RoadmapState({this.status = RoadmapStatus.initial, this.roadmap});
 
   final RoadmapStatus status;
-  final Roadmap roadmap;
+  final Roadmap? roadmap;
 
   RoadmapState copyWith({
     RoadmapStatus? status,

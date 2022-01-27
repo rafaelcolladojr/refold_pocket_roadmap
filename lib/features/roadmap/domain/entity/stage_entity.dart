@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/stage_details_entity.dart';
 
-class Stage {
-  Stage({
+class Stage extends Equatable {
+  const Stage({
     required this.id,
     required this.subtitle,
     required this.headline,
@@ -9,9 +10,12 @@ class Stage {
     required this.details,
   });
 
-  String id;
-  String subtitle;
-  String headline;
-  String intro;
-  StageDetails details;
+  final String id;
+  final String subtitle;
+  final String headline;
+  final String intro;
+  final StageDetails details;
+
+  @override
+  List<Object?> get props => [id, subtitle, headline, intro, details];
 }

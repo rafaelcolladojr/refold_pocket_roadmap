@@ -1,9 +1,14 @@
-class ArticleDetails {
-  ArticleDetails({
+import 'package:equatable/equatable.dart';
+
+class ArticleDetails extends Equatable {
+  const ArticleDetails({
     required this.title,
     required this.body,
   });
 
-  String title;
-  String body; // Body of the article in HTML format
+  final String title;
+  final String body;
+
+  @override
+  List<Object?> get props => [title, body]; // Body of the article in HTML format
 }

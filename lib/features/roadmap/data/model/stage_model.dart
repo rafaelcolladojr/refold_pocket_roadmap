@@ -1,22 +1,15 @@
-import 'package:refold_pocket_roadmap/features/roadmap/data/model/article_details_model.dart';
-import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/stage_details_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/stage_entity.dart';
 
 import 'stage_details_model.dart';
 
 class StageModel extends Stage {
-  StageModel({
+  const StageModel({
     required String id,
     required String subtitle,
     required String headline,
     required String intro,
     required StageDetailsModel details,
-  }) : super(
-            id: id,
-            subtitle: subtitle,
-            headline: headline,
-            intro: intro,
-            details: details);
+  }) : super(id: id, subtitle: subtitle, headline: headline, intro: intro, details: details);
 
   factory StageModel.fromJson(Map<String, dynamic> json) => StageModel(
         id: json["id"],

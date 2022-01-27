@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:refold_pocket_roadmap/core/util/app_colors.dart';
+import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
 
 extension TextStyleColorX on TextStyle {
   TextStyle withColor(Color color) {
