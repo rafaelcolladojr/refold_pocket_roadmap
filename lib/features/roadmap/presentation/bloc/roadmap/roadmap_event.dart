@@ -8,11 +8,3 @@ class GetRoadmapEvent extends RoadmapEvent {
   final RoadmapType type;
   final RoadmapLanguage lang;
 }
-
-class GetArticleEvent extends RoadmapEvent {
-  GetArticleEvent({required this.id});
-
-  final String id;
-}
-
-class GetRoadmapListEvent extends RoadmapEvent {}
