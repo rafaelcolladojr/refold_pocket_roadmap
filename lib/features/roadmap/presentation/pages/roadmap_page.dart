@@ -7,7 +7,11 @@ import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
 import 'package:refold_pocket_roadmap/core/util/enums/roadmap_type.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/bloc/roadmap/bloc.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/article_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/roadmap_page_args.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/stage_page_args.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/article_page.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/stage_page.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/stage_list_item.dart';
 
 class RoadmapPage extends StatelessWidget {
@@ -25,9 +29,16 @@ class RoadmapPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(color: kPrimaryColor, onPressed: () {}, icon: const Icon(Icons.search, color: kPrimaryColor, size: 30.0)),
+            leading: IconButton(
+              color: kPrimaryColor,
+              onPressed: () {},
+              icon: const Icon(Icons.search, color: kPrimaryColor, size: 30.0),
+            ),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.menu, color: kPrimaryColor, size: 30.0)),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.menu, color: kPrimaryColor, size: 30.0),
+              ),
             ],
           ),
           body: SafeArea(
@@ -41,19 +52,20 @@ class RoadmapPage extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(8.0),
                       height: deviceInfo.size.height * 0.10,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(title, style: kTitle1),
-                          ),
-                          Row()
-                        ],
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(title, style: kTitle1),
                       ),
                     ),
                   ),
-                  state.status == RoadmapStatus.success ? _roadmapToStageList(state.roadmap!) : const Center(child: CircularProgressIndicator())
+                  state.status == RoadmapStatus.success
+                      ? _roadmapToStageList(context, state.roadmap!)
+                      : const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
                 ],
               ),
             ),
@@ -63,7 +75,7 @@ class RoadmapPage extends StatelessWidget {
     );
   }
 
-  Widget _roadmapToStageList(Roadmap roadmap) {
+  Widget _roadmapToStageList(BuildContext context, Roadmap roadmap) {
     List<StageListItem> listItems = [];
     roadmap.stages.asMap().forEach((index, stage) {
       listItems.add(StageListItem(
@@ -71,16 +83,29 @@ class RoadmapPage extends StatelessWidget {
         title: stage.headline,
         subtitle: stage.intro,
         color: stageListIndexToColor(index),
+        onTap: () => Navigator.pushNamed(context, StagePage.route, arguments: StagePageArgs(stage: stage)),
       ));
     });
     return Expanded(
-      child: ListView.separated(itemBuilder: (_, index) => listItems[index], separatorBuilder: (_, index) => const SizedBox(height: 8.0), itemCount: listItems.length),
+      child: ListView.separated(
+        itemBuilder: (_, index) => listItems[index],
+        separatorBuilder: (_, index) => const SizedBox(height: 8.0),
+        itemCount: listItems.length,
+      ),
     );
   }
 
   Color stageListIndexToColor(int index) {
-    final colors = [kPrimaryColorLight, kPrimaryColor, kPrimaryColorDark, kPrimaryColorDarkExtra, kPrimaryColorDisabled];
+    final colors = [
+      kPrimaryColorLight,
+      kPrimaryColor,
+      kPrimaryColorDark,
+      kPrimaryColorDarkExtra,
+      kPrimaryColorDisabled,
+    ];
 
-    return colors[min(index, colors.length - 1)];
+    // repeat last entry
+    int colorIndex = min(index, colors.length - 1);
+    return colors[colorIndex];
   }
 }

@@ -9,17 +9,19 @@ class StageListItem extends StatelessWidget {
     required this.title,
     this.subtitle = '',
     this.color = kPrimaryColor,
+    this.onTap,
   }) : super(key: key);
 
   final String marker;
   final String title;
   final String subtitle;
   final Color color;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(top: 26.0, left: 26, right: 26),
         child: Material(
