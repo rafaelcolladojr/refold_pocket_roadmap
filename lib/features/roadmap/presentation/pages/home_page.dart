@@ -26,16 +26,16 @@ class HomePage extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               systemOverlayStyle: SystemUiOverlayStyle.dark,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.menu,
-                    color: kPrimaryColorDark,
-                    size: 30.0,
-                  ),
-                ),
-              ],
+              // actions: [
+              //   IconButton(
+              //     onPressed: () {},
+              //     icon: const Icon(
+              //       Icons.menu,
+              //       color: kPrimaryColorDark,
+              //       size: 30.0,
+              //     ),
+              //   ),
+              // ],
               bottom: PreferredSize(
                 child: Padding(
                   padding: const EdgeInsets.only(

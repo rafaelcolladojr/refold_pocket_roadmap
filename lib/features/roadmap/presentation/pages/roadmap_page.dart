@@ -7,10 +7,8 @@ import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
 import 'package:refold_pocket_roadmap/core/util/enums/roadmap_type.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/roadmap_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/bloc/roadmap/bloc.dart';
-import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/article_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/roadmap_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/stage_page_args.dart';
-import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/article_page.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/stage_page.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/stage_list_item.dart';
 

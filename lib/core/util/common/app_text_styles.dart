@@ -40,3 +40,17 @@ const TextStyle kParagraph = TextStyle(
   color: kPrimaryColor,
   fontSize: 14.0,
 );
+
+const TextStyle kArticleThumbnailId = TextStyle(
+  color: Colors.black,
+  fontSize: 14.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Montserrat',
+);
+
+const TextStyle kArticleThumbnailTitle = TextStyle(
+  color: Colors.white,
+  fontSize: 14.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Montserrat',
+);
