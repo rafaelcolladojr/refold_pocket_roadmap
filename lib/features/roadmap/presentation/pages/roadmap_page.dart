@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
@@ -27,17 +28,7 @@ class RoadmapPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              color: kPrimaryColor,
-              onPressed: () {},
-              icon: const Icon(Icons.search, color: kPrimaryColor, size: 30.0),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.menu, color: kPrimaryColor, size: 30.0),
-              ),
-            ],
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
           body: SafeArea(
             child: Container(
