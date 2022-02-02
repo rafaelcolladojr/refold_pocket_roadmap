@@ -4,6 +4,7 @@ import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/stage_details_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/stage_page_args.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/article_list_item.dart';
 
 class StagePage extends StatelessWidget {
   static String route = '/stage';
@@ -14,12 +15,11 @@ class StagePage extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as StagePageArgs;
     final stage = args.stage;
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           width: double.infinity,
@@ -50,39 +50,15 @@ class StagePage extends StatelessWidget {
 
       List<Widget> sectionArticles = [];
       section.articles.asMap().forEach((index, article) {
-        List<String> splitTitle = article.title.split(":");
         sectionArticles.add(
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: AspectRatio(
-              aspectRatio: 1 / 1,
-              child: Material(
-                borderRadius: BorderRadius.circular(10.0),
-                elevation: 8.0,
-                color: kPrimaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(splitTitle[0], style: kArticleThumbnailId),
-                      Text(
-                        splitTitle[1].trim(),
-                        style: kArticleThumbnailTitle,
-                        overflow: TextOverflow.clip,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+          ArticleListItem(title: article.title),
         );
       });
       widgets.add(SizedBox(
-        height: 100.0,
-        child: Row(
+        height: 120.0,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
           children: sectionArticles,
         ),
       ));

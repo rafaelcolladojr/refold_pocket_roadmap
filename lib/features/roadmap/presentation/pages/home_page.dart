@@ -20,22 +20,15 @@ class HomePage extends StatelessWidget {
     Size deviceSize = MediaQuery.of(context).size;
     return BlocBuilder<RoadmapListBloc, RoadmapListState>(
       builder: (context, state) {
+        if (state.status == RoadmapListStatus.failure) {
+          return roadmapUnavailiable(deviceSize);
+        }
         List<String> languages = _mapToLanguages(state.thumbnails);
         return DefaultTabController(
           length: state.status == RoadmapListStatus.success ? languages.length : 0,
           child: Scaffold(
             appBar: AppBar(
               systemOverlayStyle: SystemUiOverlayStyle.dark,
-              // actions: [
-              //   IconButton(
-              //     onPressed: () {},
-              //     icon: const Icon(
-              //       Icons.menu,
-              //       color: kPrimaryColorDark,
-              //       size: 30.0,
-              //     ),
-              //   ),
-              // ],
               bottom: PreferredSize(
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -88,6 +81,64 @@ class HomePage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  // Displayed if roadmap json files aren't available. (corrupt download?)
+  Scaffold roadmapUnavailiable(Size deviceSize) {
+    return Scaffold(
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        bottom: PreferredSize(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              bottom: 8.0,
+              left: 16.0,
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    'Pocket\nRoadmaps',
+                    style: kTitle1.withColor(kPrimaryColorDark),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          preferredSize: Size.fromHeight(deviceSize.height * 0.10),
+        ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/logo-primary.png'),
+              opacity: 0.2,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+      body: SafeArea(
+        bottom: false,
+        child: Container(
+          color: kPrimaryColorDark.withAlpha(70),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Roadmap Information Unavailable', textAlign: TextAlign.center, style: kTitle3.withColor(kPrimaryColorDarkExtra.withAlpha(100))),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Text('Please reinstall this applicaiton.', style: kTitle4.withColor(kPrimaryColorDarkExtra.withAlpha(100))),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
