@@ -11,7 +11,7 @@ const TextStyle kTitle1 = TextStyle(
   fontFamily: "Montserrat",
   color: kPrimaryColor,
   fontWeight: FontWeight.w700,
-  fontSize: 32.0,
+  fontSize: 26.0,
 );
 
 const TextStyle kTitle2 = TextStyle(
