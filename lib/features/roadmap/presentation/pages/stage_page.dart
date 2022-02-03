@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/stage_details_entity.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/article_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/stage_page_args.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/article_page.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/article_list_item.dart';
 
 class StagePage extends StatelessWidget {
@@ -51,7 +53,10 @@ class StagePage extends StatelessWidget {
       List<Widget> sectionArticles = [];
       section.articles.asMap().forEach((index, article) {
         sectionArticles.add(
-          ArticleListItem(title: article.title),
+          ArticleListItem(
+            title: article.title,
+            onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(article: article)),
+          ),
         );
       });
       widgets.add(SizedBox(

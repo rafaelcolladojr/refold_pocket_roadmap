@@ -9,7 +9,6 @@ class ArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ArticlePageArgs;
 
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold();
   }
 }
