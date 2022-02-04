@@ -11,21 +11,21 @@ const TextStyle kTitle1 = TextStyle(
   fontFamily: "Montserrat",
   color: kPrimaryColor,
   fontWeight: FontWeight.w700,
-  fontSize: 26.0,
+  fontSize: 30.0,
 );
 
 const TextStyle kTitle2 = TextStyle(
   fontFamily: "Montserrat",
   color: kPrimaryColor,
   fontWeight: FontWeight.w700,
-  fontSize: 30.0,
+  fontSize: 24.0,
 );
 
 const TextStyle kTitle3 = TextStyle(
   fontFamily: "Montserrat",
   color: kPrimaryColor,
   fontWeight: FontWeight.w700,
-  fontSize: 24.0,
+  fontSize: 20.0,
 );
 
 const TextStyle kTitle4 = TextStyle(
@@ -36,9 +36,9 @@ const TextStyle kTitle4 = TextStyle(
 );
 
 const TextStyle kParagraph = TextStyle(
-  fontFamily: "Montserrat",
+  fontFamily: "Open Sans",
   color: kPrimaryColor,
-  fontSize: 14.0,
+  fontSize: 15.0,
 );
 
 const TextStyle kArticleThumbnailId = TextStyle(
@@ -53,4 +53,11 @@ const TextStyle kArticleThumbnailTitle = TextStyle(
   fontSize: 14.0,
   fontWeight: FontWeight.bold,
   fontFamily: 'Montserrat',
+);
+
+const TextStyle kArticleFootnote = TextStyle(
+  fontFamily: "Open Sans",
+  color: kPrimaryColor,
+  fontSize: 15.0,
+  decoration: TextDecoration.none,
 );
