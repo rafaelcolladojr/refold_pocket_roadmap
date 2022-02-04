@@ -60,7 +60,7 @@ class StagePage extends StatelessWidget {
         );
       });
       widgets.add(SizedBox(
-        height: 120.0,
+        height: 140.0,
         child: ListView(
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.none,
