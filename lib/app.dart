@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<ArticleBloc>(create: (_) => ArticleBloc(di.getIt<RoadmapRepository>())),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Refold Pocket Roadmap',
         theme: ThemeData(appBarTheme: kAppBarTheme),
         initialRoute: HomePage.route,
