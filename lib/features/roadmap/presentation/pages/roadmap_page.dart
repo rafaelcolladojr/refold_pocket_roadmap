@@ -29,25 +29,25 @@ class RoadmapPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
+            elevation: 4.0,
+            toolbarHeight: deviceInfo.size.height * 0.10,
+            automaticallyImplyLeading: false,
+            centerTitle: false,
+            title: Text(title, style: kTitle1),
+            actions: const [
+              IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.more_vert,
+                    color: kPrimaryColor,
+                  )),
+            ],
           ),
           body: SafeArea(
             child: Container(
               color: kBackgroundColorDark,
               child: Column(
                 children: [
-                  Material(
-                    color: Colors.white,
-                    elevation: 4.0,
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      height: deviceInfo.size.height * 0.10,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(title, style: kTitle1),
-                      ),
-                    ),
-                  ),
                   state.status == RoadmapStatus.success
                       ? _roadmapToStageList(context, state.roadmap!)
                       : const Expanded(

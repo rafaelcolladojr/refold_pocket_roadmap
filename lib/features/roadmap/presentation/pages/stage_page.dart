@@ -17,9 +17,38 @@ class StagePage extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as StagePageArgs;
     final stage = args.stage;
 
+    Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
+        automaticallyImplyLeading: false,
+        elevation: 4.0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(deviceSize.height * 0.06),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(stage.subtitle, style: kTitle4),
+                      Text(stage.headline, style: kTitle1.withColor(kPrimaryColorDark)),
+                    ],
+                  ),
+                ),
+                const IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.more_vert, color: kPrimaryColor),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -29,8 +58,6 @@ class StagePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(stage.subtitle, style: kTitle4),
-              Text(stage.headline, style: kTitle1.withColor(kPrimaryColorDark)),
               const SizedBox(height: 16.0),
               Text(stage.intro, style: kParagraph),
               const SizedBox(height: 16.0),

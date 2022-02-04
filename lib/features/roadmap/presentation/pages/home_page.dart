@@ -29,7 +29,9 @@ class HomePage extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               systemOverlayStyle: SystemUiOverlayStyle.dark,
+              elevation: 4.0,
               bottom: PreferredSize(
+                preferredSize: Size.fromHeight(deviceSize.height * 0.12),
                 child: Padding(
                   padding: const EdgeInsets.only(
                     bottom: 8.0,
@@ -38,15 +40,20 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text(
-                          'Pocket\nRoadmaps',
-                          style: kTitle1.withColor(kPrimaryColorDark),
-                        ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: Text(
+                              'Pocket\nRoadmaps',
+                              style: kTitle1.withColor(kPrimaryColorDark),
+                            ),
+                          ),
+                        ],
                       ),
                       TabBar(
                         isScrollable: true,
+                        enableFeedback: false,
                         indicator: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: kPrimaryColorDark,
@@ -57,7 +64,6 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                preferredSize: Size.fromHeight(deviceSize.height * 0.15),
               ),
               flexibleSpace: Container(
                 decoration: const BoxDecoration(
