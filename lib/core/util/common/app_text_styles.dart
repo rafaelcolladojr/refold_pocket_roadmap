@@ -35,6 +35,13 @@ const TextStyle kTitle4 = TextStyle(
   fontSize: 16.0,
 );
 
+const TextStyle kTitle6 = TextStyle(
+  fontFamily: "Montserrat",
+  color: kPrimaryColor,
+  fontWeight: FontWeight.w700,
+  fontSize: 14.0,
+);
+
 const TextStyle kParagraph = TextStyle(
   fontFamily: "Open Sans",
   color: kPrimaryColor,

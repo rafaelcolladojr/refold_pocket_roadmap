@@ -21,6 +21,7 @@ class ArticleHtml extends StatelessWidget {
         'p': Style.fromTextStyle(kParagraph.withColor(Colors.black)),
         'h3': Style.fromTextStyle(kTitle2),
         'h4': Style.fromTextStyle(kTitle3),
+        'h6': Style.fromTextStyle(kTitle6),
         'a.header-link': Style(display: Display.NONE),
         'a': Style(color: kPrimaryColor),
         'a[href^="#footnote"]': Style.fromTextStyle(kArticleFootnote),
