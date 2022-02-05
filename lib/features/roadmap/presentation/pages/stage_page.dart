@@ -18,37 +18,27 @@ class StagePage extends StatelessWidget {
     final stage = args.stage;
 
     Size deviceSize = MediaQuery.of(context).size;
+    double _toolbarHeight = deviceSize.height * 0.15;
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         automaticallyImplyLeading: false,
         elevation: 4.0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(deviceSize.height * 0.06),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(stage.subtitle, style: kTitle4),
-                      Text(stage.headline, style: kTitle1.withColor(kPrimaryColorDark)),
-                    ],
-                  ),
-                ),
-                const IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.more_vert, color: kPrimaryColor),
-                ),
-              ],
-            ),
+        toolbarHeight: _toolbarHeight,
+        title: SizedBox(
+          height: _toolbarHeight,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(stage.subtitle, style: kTitle4),
+              Text(stage.headline, style: kTitle1.withColor(kPrimaryColorDark)),
+            ],
           ),
         ),
+        actions: const [
+          IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(

@@ -23,17 +23,25 @@ class RoadmapPage extends StatelessWidget {
     BlocProvider.of<RoadmapBloc>(context).add(GetRoadmapEvent(type: args.type, lang: args.lang));
     String title = args.type.toLargeString();
 
-    MediaQueryData deviceInfo = MediaQuery.of(context);
+    Size deviceSize = MediaQuery.of(context).size;
+    double _toolbarHeight = deviceSize.height * 0.15;
     return BlocBuilder<RoadmapBloc, RoadmapState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
-            elevation: 4.0,
-            toolbarHeight: deviceInfo.size.height * 0.10,
             automaticallyImplyLeading: false,
-            centerTitle: false,
-            title: Text(title, style: kTitle1),
+            toolbarHeight: _toolbarHeight,
+            elevation: 4.0,
+            title: SizedBox(
+              height: _toolbarHeight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(title, style: kTitle1.withColor(kPrimaryColorDark)),
+                ],
+              ),
+            ),
             actions: const [
               IconButton(
                   onPressed: null,

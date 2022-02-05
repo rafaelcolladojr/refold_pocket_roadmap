@@ -31,31 +31,26 @@ class ArticlePage extends StatelessWidget {
 
 Widget _articlePage(BuildContext context, Article? article) {
   Size deviceSize = MediaQuery.of(context).size;
+  double _toolbarHeight = deviceSize.height * 0.15;
   String title = article == null ? "Article Title" : article.title;
   String body = article == null ? "" : article.body;
   return Scaffold(
     appBar: AppBar(
       elevation: 4.0,
       automaticallyImplyLeading: false,
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(deviceSize.height * 0.08),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                flex: 10,
-                child: Text(title, style: kTitle1.withColor(kPrimaryColorDark)),
-              ),
-              const Flexible(
-                child: IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
-              ),
-            ],
-          ),
+      toolbarHeight: _toolbarHeight,
+      title: SizedBox(
+        height: _toolbarHeight,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(title, style: kTitle1.withColor(kPrimaryColorDark), maxLines: 3),
+          ],
         ),
       ),
+      actions: [
+        const IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
+      ],
     ),
     body: SafeArea(
       child: SingleChildScrollView(

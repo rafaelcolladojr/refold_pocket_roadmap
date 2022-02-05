@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
             body: SafeArea(
               bottom: false,
               child: Container(
-                color: kPrimaryColorDark.withAlpha(70),
+                color: kPrimaryColorDark.withAlpha(20),
                 child: TabBarView(
                   children: _stateToTabBarViewChildren(context, state),
                 ),
