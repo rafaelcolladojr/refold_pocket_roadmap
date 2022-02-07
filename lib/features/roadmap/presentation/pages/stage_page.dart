@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
@@ -25,6 +26,7 @@ class StagePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 4.0,
         toolbarHeight: _toolbarHeight,
+        centerTitle: false,
         title: SizedBox(
           height: _toolbarHeight,
           child: Column(
@@ -32,7 +34,7 @@ class StagePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(stage.subtitle, style: kTitle4),
-              Text(stage.headline, style: kTitle1.withColor(kPrimaryColorDark)),
+              AutoSizeText(stage.headline, maxLines: 1, style: kTitle1.withColor(kPrimaryColorDark)),
             ],
           ),
         ),

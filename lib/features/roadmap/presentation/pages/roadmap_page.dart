@@ -33,6 +33,7 @@ class RoadmapPage extends StatelessWidget {
             automaticallyImplyLeading: false,
             toolbarHeight: _toolbarHeight,
             elevation: 4.0,
+            centerTitle: false,
             title: SizedBox(
               height: _toolbarHeight,
               child: Column(

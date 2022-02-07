@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
@@ -33,6 +34,7 @@ Widget _articlePage(BuildContext context, Article? article) {
   Size deviceSize = MediaQuery.of(context).size;
   double _toolbarHeight = deviceSize.height * 0.15;
   String title = article == null ? "Article Title" : article.title;
+  List<String> titleSplit = title.split(":");
   String body = article == null ? "" : article.body;
   return Scaffold(
     appBar: AppBar(
@@ -43,13 +45,16 @@ Widget _articlePage(BuildContext context, Article? article) {
         height: _toolbarHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: kTitle1.withColor(kPrimaryColorDark), maxLines: 3),
+            Text(titleSplit[0], style: kTitle3),
+            AutoSizeText(titleSplit[1].trim(), style: kTitle1.withColor(kPrimaryColorDark), maxLines: 2),
           ],
         ),
       ),
-      actions: [
-        const IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
+      actions: const [
+        IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: kPrimaryColorDark, size: 30.0)),
+        IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColorDark, size: 30.0)),
       ],
     ),
     body: SafeArea(
