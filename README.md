@@ -10,7 +10,8 @@
 
 An offline, portable version of the [Refold Fluency Roadmaps](https://refold.la/roadmap). written entirely in [Flutter](https://flutter.dev/)
 
-
+<kbd>
 <img src="https://github.com/rafaelcolladojr/refold_pocket_roadmap/raw/master/assets/images/pocket_roadmap_demo_0.gif" width="256" />
+</kbd>
 
 </div>
