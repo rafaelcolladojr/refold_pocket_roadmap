@@ -23,7 +23,7 @@ class StagePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         elevation: 4.0,
         toolbarHeight: _toolbarHeight,
         centerTitle: false,
@@ -38,9 +38,9 @@ class StagePage extends StatelessWidget {
             ],
           ),
         ),
-        actions: const [
-          IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
-        ],
+        // actions: const [
+        //   IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Container(

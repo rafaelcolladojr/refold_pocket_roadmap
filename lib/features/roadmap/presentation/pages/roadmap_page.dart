@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +31,7 @@ class RoadmapPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             systemOverlayStyle: SystemUiOverlayStyle.dark,
-            automaticallyImplyLeading: false,
+            // automaticallyImplyLeading: false,
             toolbarHeight: _toolbarHeight,
             elevation: 4.0,
             centerTitle: false,
@@ -39,20 +40,25 @@ class RoadmapPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title, style: kTitle1.withColor(kPrimaryColorDark)),
+                  AutoSizeText(
+                    title,
+                    style: kTitle1.withColor(kPrimaryColorDark),
+                    maxLines: 1,
+                  ),
                 ],
               ),
             ),
-            actions: const [
-              IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.more_vert,
-                    color: kPrimaryColor,
-                  )),
-            ],
+            // actions: const [
+            //   IconButton(
+            //       onPressed: null,
+            //       icon: Icon(
+            //         Icons.more_vert,
+            //         color: kPrimaryColor,
+            //       )),
+            // ],
           ),
           body: SafeArea(
+            bottom: false,
             child: Container(
               color: kBackgroundColorDark,
               child: Column(

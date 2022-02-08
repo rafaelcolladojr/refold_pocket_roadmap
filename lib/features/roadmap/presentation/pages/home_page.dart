@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
+    double _toolbarHeight = deviceSize.height * 0.12;
     return BlocBuilder<RoadmapListBloc, RoadmapListState>(
       builder: (context, state) {
         if (state.status == RoadmapListStatus.failure) {
@@ -30,38 +32,30 @@ class HomePage extends StatelessWidget {
             appBar: AppBar(
               systemOverlayStyle: SystemUiOverlayStyle.dark,
               elevation: 4.0,
+              toolbarHeight: _toolbarHeight,
+              centerTitle: false,
+              title: SizedBox(
+                height: _toolbarHeight,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AutoSizeText('Pocket\nRoadmaps', maxLines: 2, style: kTitle1.withColor(kPrimaryColorDark)),
+                  ],
+                ),
+              ),
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(deviceSize.height * 0.12),
+                preferredSize: Size.fromHeight(deviceSize.height * 0.08),
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 8.0,
-                    left: 16.0,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 16.0),
-                            child: Text(
-                              'Pocket\nRoadmaps',
-                              style: kTitle1.withColor(kPrimaryColorDark),
-                            ),
-                          ),
-                        ],
-                      ),
-                      TabBar(
-                        isScrollable: true,
-                        enableFeedback: false,
-                        indicator: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: kPrimaryColorDark,
-                        ),
-                        unselectedLabelColor: kPrimaryColorDark,
-                        tabs: state.status == RoadmapListStatus.success ? languages.map((lang) => Tab(text: lang)).toList() : [],
-                      ),
-                    ],
+                  padding: const EdgeInsets.all(8.0),
+                  child: TabBar(
+                    isScrollable: true,
+                    enableFeedback: false,
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: kPrimaryColorDark,
+                    ),
+                    unselectedLabelColor: kPrimaryColorDark,
+                    tabs: state.status == RoadmapListStatus.success ? languages.map((lang) => Tab(text: lang)).toList() : [],
                   ),
                 ),
               ),

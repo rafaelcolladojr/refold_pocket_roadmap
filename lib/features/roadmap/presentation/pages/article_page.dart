@@ -39,7 +39,7 @@ Widget _articlePage(BuildContext context, Article? article) {
   return Scaffold(
     appBar: AppBar(
       elevation: 4.0,
-      automaticallyImplyLeading: false,
+      // automaticallyImplyLeading: false,
       toolbarHeight: _toolbarHeight,
       title: SizedBox(
         height: _toolbarHeight,
@@ -53,8 +53,11 @@ Widget _articlePage(BuildContext context, Article? article) {
         ),
       ),
       actions: const [
-        IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: kPrimaryColorDark, size: 30.0)),
-        IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColorDark, size: 30.0)),
+        Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: kPrimaryColorDark, size: 30.0)),
+        ),
+        //IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColorDark, size: 30.0)),
       ],
     ),
     body: SafeArea(
