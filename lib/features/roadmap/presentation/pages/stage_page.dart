@@ -73,7 +73,8 @@ class StagePage extends StatelessWidget {
       section.articles.asMap().forEach((index, article) {
         sectionArticles.add(
           ArticleListItem(
-            title: article.title,
+            code: article.title.split(":")[0],
+            title: article.thumbTitle,
             onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(article: article)),
           ),
         );

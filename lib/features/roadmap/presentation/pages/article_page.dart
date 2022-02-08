@@ -34,7 +34,8 @@ Widget _articlePage(BuildContext context, Article? article) {
   Size deviceSize = MediaQuery.of(context).size;
   double _toolbarHeight = deviceSize.height * 0.15;
   String title = article == null ? "Article Title" : article.title;
-  List<String> titleSplit = title.split(":");
+  String titleTrim = title.substring(3).trim();
+  String code = title.substring(0, 2);
   String body = article == null ? "" : article.body;
   return Scaffold(
     appBar: AppBar(
@@ -47,8 +48,8 @@ Widget _articlePage(BuildContext context, Article? article) {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(titleSplit[0], style: kTitle3),
-            AutoSizeText(titleSplit[1].trim(), style: kTitle1.withColor(kPrimaryColorDark), maxLines: 2),
+            Text(code, style: kTitle3),
+            AutoSizeText(titleTrim, style: kTitle1.withColor(kPrimaryColorDark), maxLines: 2),
           ],
         ),
       ),
