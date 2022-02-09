@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_colors.dart';
 import 'package:refold_pocket_roadmap/core/util/common/app_text_styles.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/article_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/stage_details_entity.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/article_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/stage_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/article_page.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/article_list_item.dart';
+import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/overview_thumbnail.dart';
 
 class StagePage extends StatelessWidget {
   static String route = '/stage';
@@ -23,7 +25,6 @@ class StagePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-        // automaticallyImplyLeading: false,
         elevation: 4.0,
         toolbarHeight: _toolbarHeight,
         centerTitle: false,
@@ -38,9 +39,6 @@ class StagePage extends StatelessWidget {
             ],
           ),
         ),
-        // actions: const [
-        //   IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColor)),
-        // ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -53,8 +51,7 @@ class StagePage extends StatelessWidget {
               const SizedBox(height: 16.0),
               Text(stage.intro, style: kParagraph),
               const SizedBox(height: 16.0),
-              // TODO: Add overview article here
-              ..._stageDetailsToWidgets(context, stage.details),
+              ..._stageDetailsToWidgets(context: context, index: stage.subtitle.split(' ')[1], details: stage.details),
             ],
           ),
         ),
@@ -62,9 +59,14 @@ class StagePage extends StatelessWidget {
     );
   }
 
-  List<Widget> _stageDetailsToWidgets(BuildContext context, StageDetails details) {
+  // index to be used as OverviewThumbnail code
+  List<Widget> _stageDetailsToWidgets({required BuildContext context, required String index, required StageDetails details}) {
     List<Widget> widgets = [];
 
+    // Overview Article
+    widgets.add(_overviewArticleToWidget(context: context, code: index, overview: details.overview));
+    widgets.add(const SizedBox(height: 16.0));
+    // Article Sections
     for (var section in details.articleSections) {
       widgets.add(Text(section.title, style: kTitle3));
       widgets.add(const SizedBox(height: 16.0));
@@ -91,5 +93,16 @@ class StagePage extends StatelessWidget {
     }
 
     return widgets;
+  }
+
+  Widget _overviewArticleToWidget({required BuildContext context, required String code, required Article overview}) {
+    return SizedBox(
+      height: 140.0,
+      child: OverviewThumbnail(
+        code: code,
+        title: overview.thumbTitle,
+        onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(article: overview)),
+      ),
+    );
   }
 }

@@ -33,14 +33,27 @@ class ArticlePage extends StatelessWidget {
 Widget _articlePage(BuildContext context, Article? article) {
   Size deviceSize = MediaQuery.of(context).size;
   double _toolbarHeight = deviceSize.height * 0.15;
-  String title = article == null ? "Article Title" : article.title;
-  String titleTrim = title.substring(3).trim();
-  String code = title.substring(0, 2);
-  String body = article == null ? "" : article.body;
+
+  String title = article == null ? 'Article Title' : article.title;
+  String titleTrim = '';
+  String code = '';
+
+  var firstColonIndex = title.indexOf(':'); // Returns -1 if colon doensn't exist in title
+  if (firstColonIndex == -1) {
+    titleTrim = title;
+  } else {
+    // Everything after first instance of ':'
+    // eg. Title='Stage 3: Learn to Speak'
+    //     Returns 'Learn to Speak'
+    titleTrim = title.substring(firstColonIndex + 1).trim();
+    // Everything before first instance of ':'
+    code = title.substring(0, firstColonIndex);
+  }
+
+  String body = article == null ? '' : article.body;
   return Scaffold(
     appBar: AppBar(
       elevation: 4.0,
-      // automaticallyImplyLeading: false,
       toolbarHeight: _toolbarHeight,
       title: SizedBox(
         height: _toolbarHeight,
@@ -58,7 +71,6 @@ Widget _articlePage(BuildContext context, Article? article) {
           padding: EdgeInsets.only(right: 8.0),
           child: IconButton(onPressed: null, icon: Icon(Icons.favorite_border, color: kPrimaryColorDark, size: 30.0)),
         ),
-        //IconButton(onPressed: null, icon: Icon(Icons.more_vert, color: kPrimaryColorDark, size: 30.0)),
       ],
     ),
     body: SafeArea(

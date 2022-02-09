@@ -45,19 +45,34 @@ const TextStyle kTitle6 = TextStyle(
 const TextStyle kParagraph = TextStyle(
   fontFamily: "Open Sans",
   color: kPrimaryColor,
-  fontSize: 15.0,
+  fontSize: 16.0,
+  height: 1.4,
 );
 
 const TextStyle kArticleThumbnailId = TextStyle(
   color: Colors.black,
-  fontSize: 14.0,
+  fontSize: 18.0,
   fontWeight: FontWeight.bold,
   fontFamily: 'Montserrat',
 );
 
 const TextStyle kArticleThumbnailTitle = TextStyle(
   color: Colors.white,
-  fontSize: 14.0,
+  fontSize: 16.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Montserrat',
+);
+
+const TextStyle kOverviewThumbnailId = TextStyle(
+  color: kPrimaryColorDark,
+  fontSize: 26.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Montserrat',
+);
+
+const TextStyle kOverviewThumbnailTitle = TextStyle(
+  color: Colors.white,
+  fontSize: 26.0,
   fontWeight: FontWeight.bold,
   fontFamily: 'Montserrat',
 );
