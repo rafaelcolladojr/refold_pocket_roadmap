@@ -39,6 +39,7 @@ The app, while serving as a native mobile alternative to the [refold.la](https:/
 - [x] In-line Links to Default Browser
 - [x] Section Overviews
 - [ ] Internal Links to Articles
+- [ ] Article to Article pagination
 - [ ] Favorite Articles
 - [ ] Dark Mode
 
