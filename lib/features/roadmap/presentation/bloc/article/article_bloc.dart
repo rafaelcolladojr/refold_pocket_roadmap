@@ -18,10 +18,9 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
 
   Future<void> _onGetArticleEvent(GetArticleEvent event, Emitter<ArticleState> emitter) async {
     Either<Failure, Article> result = await _roadmapRepository.getArticle(GetArticleParams(id: event.id));
-
     result.fold(
-      (left) => const ArticleState(status: ArticleStatus.failure),
-      (right) => ArticleState(status: ArticleStatus.success, article: right),
+      (left) => emitter(const ArticleState(status: ArticleStatus.failure)),
+      (right) => emitter(ArticleState(status: ArticleStatus.success, article: right)),
     );
   }
 }

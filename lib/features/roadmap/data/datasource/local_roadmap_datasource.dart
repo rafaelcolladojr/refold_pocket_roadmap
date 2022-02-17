@@ -67,8 +67,8 @@ class LocalRoadmapDatasourceImpl implements LocalRoadmapDatasource {
 
     String articleJson = '';
     try {
-      await rootBundle.loadString(path);
-    } on FlutterError {
+      articleJson = await rootBundle.loadString(path);
+    } on Exception {
       throw FileException();
     }
 
