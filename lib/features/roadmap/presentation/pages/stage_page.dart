@@ -77,7 +77,8 @@ class StagePage extends StatelessWidget {
           ArticleListItem(
             code: article.title.split(":")[0],
             title: article.thumbTitle,
-            onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(article: article)),
+            // TODO: Change post scraper change
+            onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(articleId: article.id)),
           ),
         );
       });
@@ -101,7 +102,8 @@ class StagePage extends StatelessWidget {
       child: OverviewThumbnail(
         code: code,
         title: overview.thumbTitle,
-        onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(article: overview)),
+        // TODO: Change post scraper change
+        onTap: () => Navigator.pushNamed(context, ArticlePage.route, arguments: ArticlePageArgs(articleId: overview.id)),
       ),
     );
   }

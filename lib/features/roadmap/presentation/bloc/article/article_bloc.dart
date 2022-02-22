@@ -12,6 +12,7 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
       : _roadmapRepository = roadmapRepository,
         super(const ArticleState()) {
     on<GetArticleEvent>(_onGetArticleEvent);
+    on<PopArticleEvent>(_onPopArticleEvent);
   }
 
   final RoadmapRepository _roadmapRepository;
@@ -20,7 +21,24 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     Either<Failure, Article> result = await _roadmapRepository.getArticle(GetArticleParams(id: event.id));
     result.fold(
       (left) => emitter(const ArticleState(status: ArticleStatus.failure)),
-      (right) => emitter(ArticleState(status: ArticleStatus.success, article: right)),
+      (right) {
+        // Push current ArticleId to prev list
+        List<String> newIds = List.of(state.prevArticleIds, growable: true);
+        if (state.article != null) newIds.add(state.article!.id);
+        emitter(state.copyWith(
+          status: ArticleStatus.success,
+          article: right,
+        ));
+      },
     );
+  }
+
+  Future<void> _onPopArticleEvent(PopArticleEvent event, Emitter<ArticleState> emitter) async {
+    // Fetch preivous article if exists
+    try {
+      var latestId = state.prevArticleIds.removeLast();
+      Either<Failure, Article> result = await _roadmapRepository.getArticle(GetArticleParams(id: latestId));
+      result.fold((left) => null, (right) => emitter(state.copyWith(status: ArticleStatus.success, article: right)));
+    } on RangeError {/*Do nothing*/}
   }
 }

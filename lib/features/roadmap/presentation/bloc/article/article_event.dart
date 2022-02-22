@@ -5,3 +5,5 @@ class GetArticleEvent extends ArticleEvent {
 
   final String id;
 }
+
+class PopArticleEvent extends ArticleEvent {}

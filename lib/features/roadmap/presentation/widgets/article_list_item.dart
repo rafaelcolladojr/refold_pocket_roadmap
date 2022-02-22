@@ -16,7 +16,6 @@ class ArticleListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> splitTitle = title.split(":");
     String _code = code;
     String _title = title;
     return Padding(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:refold_pocket_roadmap/core/error/exception.dart';
 import 'package:refold_pocket_roadmap/core/util/enums/roadmap_language.dart';

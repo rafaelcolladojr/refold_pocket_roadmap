@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<RoadmapListBloc>(create: (_) => RoadmapListBloc(di.getIt<RoadmapRepository>())..add(GetRoadmapListEvent())),
-        BlocProvider<RoadmapBloc>(create: (_) => RoadmapBloc(di.getIt<RoadmapRepository>())),
-        BlocProvider<ArticleBloc>(create: (_) => ArticleBloc(di.getIt<RoadmapRepository>())),
+        BlocProvider<RoadmapListBloc>(create: (_) => di.getIt<RoadmapListBloc>()..add(GetRoadmapListEvent())),
+        BlocProvider<RoadmapBloc>(create: (_) => di.getIt<RoadmapBloc>()),
+        BlocProvider<ArticleBloc>(create: (_) => di.getIt<ArticleBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
           StagePage.route: (_) => const StagePage(),
           ArticlePage.route: (_) => const ArticlePage(),
         },
+        navigatorObservers: [di.getIt<RouteObserver<ModalRoute<void>>>()],
       ),
     );
   }

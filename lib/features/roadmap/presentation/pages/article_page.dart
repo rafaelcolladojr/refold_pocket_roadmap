@@ -7,26 +7,61 @@ import 'package:refold_pocket_roadmap/features/roadmap/domain/entity/article_ent
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/bloc/article/bloc.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/pages/arguments/article_page_args.dart';
 import 'package:refold_pocket_roadmap/features/roadmap/presentation/widgets/article_html.dart';
+import 'package:refold_pocket_roadmap/injection_container.dart' as di;
 
-class ArticlePage extends StatelessWidget {
+class ArticlePage extends StatefulWidget {
   static String route = '/article';
   const ArticlePage({Key? key}) : super(key: key);
 
   @override
+  State<ArticlePage> createState() => _ArticlePageState();
+}
+
+class _ArticlePageState extends State<ArticlePage> with RouteAware {
+  late RouteObserver routeObserver;
+
+  @override
+  void initState() {
+    super.initState();
+    routeObserver = di.getIt<RouteObserver<ModalRoute<void>>>();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ArticlePageArgs;
-    if (args.article != null) {
-      return _articlePage(context, args.article!);
-    } else {
-      BlocProvider.of<ArticleBloc>(context).add(GetArticleEvent(id: args.articleId!));
-      return BlocBuilder<ArticleBloc, ArticleState>(builder: (context, state) {
-        if (state.status == ArticleStatus.success) {
-          return _articlePage(context, state.article);
-        } else {
-          return _articlePage(context, null);
-        }
-      });
-    }
+    BlocProvider.of<ArticleBloc>(context).add(GetArticleEvent(id: args.articleId));
+    return BlocBuilder<ArticleBloc, ArticleState>(builder: (context, state) {
+      if (state.status == ArticleStatus.success) {
+        print("success!");
+        return _articlePage(context, state.article);
+      } else {
+        print("nothing...");
+        return _articlePage(context, null);
+      }
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPush() {
+    // Route was pushed onto navigator and is now topmost route.
+  }
+
+  @override
+  void didPopNext() {
+    BlocProvider.of<ArticleBloc>(context).add(PopArticleEvent());
+    // Covering route was popped off the navigator.
   }
 }
 
