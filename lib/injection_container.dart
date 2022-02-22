@@ -27,6 +27,7 @@ Future<void> init() async {
   getIt.registerLazySingleton<LocalRoadmapDatasource>(() => LocalRoadmapDatasourceImpl());
 
   // EXTERNAL
+  // TODO: Use for favorites
   // final SharedPreferences sharedPreferences =
   //     await SharedPreferences.getInstance();
   // getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
