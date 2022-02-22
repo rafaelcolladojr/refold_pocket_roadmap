@@ -47,7 +47,7 @@ class OverviewThumbnail extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: kPrimaryColor,
                       shape: BoxShape.circle,
                     ),

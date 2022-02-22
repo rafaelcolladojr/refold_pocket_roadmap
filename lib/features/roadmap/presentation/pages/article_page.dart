@@ -32,10 +32,8 @@ class _ArticlePageState extends State<ArticlePage> with RouteAware {
     BlocProvider.of<ArticleBloc>(context).add(GetArticleEvent(id: args.articleId));
     return BlocBuilder<ArticleBloc, ArticleState>(builder: (context, state) {
       if (state.status == ArticleStatus.success) {
-        print("success!");
         return _articlePage(context, state.article);
       } else {
-        print("nothing...");
         return _articlePage(context, null);
       }
     });

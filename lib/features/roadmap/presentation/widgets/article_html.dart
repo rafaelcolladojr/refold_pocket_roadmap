@@ -28,8 +28,7 @@ class ArticleHtml extends StatelessWidget {
           launch(url);
         } else {
           String id = url.replaceAll('/', '_');
-          id = id.substring(1); // Remove first underscore
-          print('$url\n$id');
+          id = id.substring(1); // R
           Navigator.pushNamed(
             context,
             ArticlePage.route,
