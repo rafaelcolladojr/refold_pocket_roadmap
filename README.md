@@ -44,7 +44,7 @@ The app, while serving as a native mobile alternative to the [refold.la](https:/
 - [ ] Favorite Articles
 - [ ] Dark Mode
 
-## Tech Used
+## Under The Hood
 
 - [Clean Architecture](https://www.goodreads.com/book/show/18043011-clean-architecture)
 - [flutter_bloc (State Management)](https://pub.dev/packages/flutter_bloc)
