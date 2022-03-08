@@ -8,7 +8,7 @@
 [![Dart - v2.10](https://img.shields.io/badge/Dart-v2.16-lightblue)](https://dart.dev/)
 <a href="https://github.com/felangel/bloc"><img src="https://tinyurl.com/bloc-library" alt="Bloc Library"></a>
 
-**An offline, portable version of the [Refold Fluency Roadmaps](https://refold.la/roadmap). written entirely in [Flutter](https://flutter.dev/)**
+**An offline, portable version of the [Refold Fluency Roadmaps](https://refold.la/roadmap) written entirely in [Flutter](https://flutter.dev/)**
 
 </br>
 
